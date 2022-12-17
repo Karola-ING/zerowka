@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from data import queries
 import math
 from dotenv import load_dotenv
@@ -13,6 +13,18 @@ SHOWN_PAGE_NUMBERS = 5 # should be odd to have a symmetry in pagination
 def index():
     shows = queries.get_shows()
     return render_template('index.html', shows=shows)
+
+
+@app.route('/twenty-actors', methods=['GET', 'POST'])
+def twenty_actors():
+
+    shows_20 = queries.get_20_actors()
+    # if request.method == "get":
+    #     actor_id = request.form.get('actorId')
+    #     print(actor_id)
+    #     movies = queries.get_movies(actor_id)
+    #     return render_template('twenty-actors.html', actors=shows_20, movies=movies)
+    return render_template('twenty-actors.html', actors=shows_20)
 
 
 @app.route('/design')

@@ -6,6 +6,23 @@ def get_shows():
     return data_manager.execute_select('SELECT id, title FROM shows;')
 
 
+def get_20_actors():
+    return data_manager.execute_select('SELECT id, name FROM actors ORDER BY name LIMIT 20 ;')
+
+
+def get_movies(actor_id):
+    query = """
+       SELECT shows.id AS id, title
+       FROM shows
+       INNER JOIN show_characters ON shows.id = show_characters.show_id
+       INNER JOIN actors ON show_characters.actor_id = actors.id
+       WHERE actors.id = %(actor_id)s
+       GROUP BY shows.id
+       """
+    return data_manager.execute_select(query,
+                                       {"show_id": actor_id})
+
+
 def get_show_count():
     return data_manager.execute_select('SELECT count(*) FROM shows;')
 

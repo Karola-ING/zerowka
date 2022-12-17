@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}20 actors{% endblock %}
+{% block content %}
+  <div class="card">
+    <ul>
+      {% for actor in actors %}
+        <li>
+          <button class="showDialog | btn btn-primary mx-3 mb-1 py-1" id="{{ actor['id'] }}">
+            {{ actor['name'] }}
+          </button>
+        </li>
+        <dialog class="modal-body box border border-1 rounded" id="actor{{ actor['id'] }}">
+          <ul>
+            <li>
+{#              <form method="get">#}
+{#                {% for movie in movies %}#}
+{#                  <input type="hidden" name="actorId" value="{{ actor['id'] }}">#}
+{#                  <button value="{{ actor['id'] }}">#}
+{#                    {{ movie['title'] }}#}
+{#                  </button>#}
+{#                {% endfor %}#}
+{#              </form>#}
+              <a href="{{ "/show/1390"}}">Test</a>
+            </li>
+          </ul>
+          <button class="btn btn-primary" id="cancelBtn{{ actor['id'] }}"
+                  value="cancel">Cancel
+          </button>
+        </dialog>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
